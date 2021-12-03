@@ -1,27 +1,101 @@
-# ContentProjection
+# LLBC 12/03 -- Angular "Slots"
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
+I. Web Components Slot overview
 
-## Development server
+II. Angular content projection
+  (step 1) `<ng-content>`
+    `ng-content` renders any `children` passed to this component.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    see: https://github.com/wlee221/angular-content-projection-demo/compare/step-1
+  (step 2) `<ng-content select=".myclass"`>
+    `ng-content` accepts `select`. Only elements that matches given CSS selector will be rendered.
 
-## Code scaffolding
+    see: https://github.com/wlee221/angular-content-projection-demo/compare/step-1...step-2
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  (step 3) `<ng-template>` and `[ngTemplateOutlet]`
 
-## Build
+    `ng-content` has few limitations:
+      - `ng-content` is HTML only, and cannot be controlled programatically
+      - You cannot pass data from parent to child
+      - It's hard to add default/fallback content.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+    `ng-template` defines a template that is not rendered by default. This is only rendered when you specifically instruct it to do so.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ```html
+      <ng-template #myTemplate>
+        I'll be rendered later!
+      </ng-template>
+    ```
 
-## Running end-to-end tests
+    `[ngTemplateOutlet]` is one way to do so. On any container, you can set `[ngTemplateOutlet]` to content template onto any element. 
+ 
+    ```html
+      <ng-container [ngTemplateOutlet]="myTemplate"></ng-container>
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    To query multiple tempalte variables, you can leverage attribute directives.
 
-## Further help
+    Attribute directive allows you to declrea reusable attributes, just like HTML attributes, that can change the appearance and behavior of DOM elements.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    In our use case, we will create `app-slot` directives to mark and collect all children that has it defined.
+
+    ```html
+      <app-authenticator>
+        <!-- Will be inserted into authenticator's footer content  -->
+        <div app-slot="footer">Custom footer</div> 
+      </app-authenticator>
+    ```
+
+    Then the parent component can collect elements with `@ContentChildren` that has the directives set.
+
+    See:  https://github.com/wlee221/angular-content-projection-demo/compare/step-2...step-3
+          https://angular.io/api/core/ng-template
+          https://angular.io/api/core/ContentChildren
+          https://angular.io/guide/attribute-directives
+
+    (step 4) `[ngTemplateContextOutlet]`
+
+    Parent component can provide any useful `context` to the child component.
+
+    ```ts
+      get context() {
+        return {
+          /** Any useful context here*/
+        };
+      }
+    ```
+
+    ```html
+      <ng-container
+        [ngTemplateOutlet]="customComponents?.authenticated || null"
+        [ngTemplateOutletContext]="context"
+      ></ng-container>
+    ```
+
+    (step 5) Default content
+
+    Because `ngTemplateOutlet` can accept JS epxressions to decide what to render, we can use it to have a fallback component if child component doesn't pass any slots.
+
+    ```html
+      <ng-template #defaultAuthenticated>
+        Some default content...
+      </ng-template>
+
+      <ng-container
+        [ngTemplateOutlet]="customComponents?.authenticated || defaultAuthenticated"
+        [ngTemplateOutletContext]="context"
+      ></ng-container>
+    ```
+
+    (step 6) Reusable `<app-slot>` component
+
+    Notice a big DX pain in writing those default contents. Web component / Vue slots allows library writers to put default content and slot name in place:
+
+    ```
+    <slot name="authenticated>
+      Some default content...
+    </slot>
+    ```
+
+    Let's recreate this in Angular, using both `ng-content` and `ng-template`.
