@@ -1,34 +1,25 @@
 <!-- Default Contents -->
-<ng-template #formFields>
-  <input name="username" placeholder="Username" />
-  <input name="password" type="password" placeholder="Password" />
-</ng-template>
 
 <!-- If user is not signed in, show sign in form -->
 <div class="authenticator" *ngIf="!user">
   <div class="container">
     <h3>Sign in to your account</h3>
     <form (submit)="handleSignIn($event)">
-      <ng-container
-        [ngTemplateOutlet]="customComponents?.formFields || formFields"
-        [ngTemplateOutletContext]="context"
-      ></ng-container>
+      <app-slot name="formFields">
+        <input name="username" placeholder="Username" />
+        <input name="password" type="password" placeholder="Password" />
+      </app-slot>
       <button>Sign In</button>
       <div class="error" *ngIf="error">
         {{ error }}
       </div>
     </form>
-    <ng-container
-      [ngTemplateOutlet]="customComponents?.footer || null"
-    ></ng-container>
+    <app-slot name="footer"></app-slot>
   </div>
 </div>
 
 <!-- If user is signed in, project desired content -->
 <div class="authenticated" *ngIf="user">
   <!-- Accept contents with class name "authenticated" -->
-  <ng-container
-    [ngTemplateOutlet]="customComponents?.authenticated || null"
-    [ngTemplateOutletContext]="context"
-  ></ng-container>
+  <app-slot name="authenticated" [context]="context"></app-slot>
 </div>
