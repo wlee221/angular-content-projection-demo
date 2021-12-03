@@ -3,6 +3,11 @@
     <div style="text-align: center; color: gray">© All Rights Reserved</div>
   </ng-template>
 
+  <ng-template appSlot="formFields">
+    <input name="username" placeholder="Email" />
+    <input name="password" type="password" placeholder="Password" />
+  </ng-template>
+
   <ng-template appSlot="authenticated" let-user="user" let-signOut="signOut">
     <h3>Welcome, {{ user.username }}!</h3>
     <button (click)="signOut()" style="width: unset">Sign Out</button>
