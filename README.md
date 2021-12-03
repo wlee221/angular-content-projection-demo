@@ -49,10 +49,11 @@ In our use case, we will create `app-slot` directives to mark and collect all ch
 
 Then the parent component can collect elements with `@ContentChildren` that has the directives set.
 
-See:  https://github.com/wlee221/angular-content-projection-demo/compare/step-2...step-3
-      https://angular.io/api/core/ng-template
-      https://angular.io/api/core/ContentChildren
-      https://angular.io/guide/attribute-directives
+See:  
+- https://github.com/wlee221/angular-content-projection-demo/compare/step-2...step-3
+- https://angular.io/api/core/ng-template
+- https://angular.io/api/core/ContentChildren
+- https://angular.io/guide/attribute-directives
 
 #### (step 4) `[ngTemplateContextOutlet]`
 
@@ -92,11 +93,11 @@ See: https://github.com/wlee221/angular-content-projection-demo/compare/step-3..
 
 See: https://github.com/wlee221/angular-content-projection-demo/compare/step-4...step-5
 
-(step 6) Reusable `<app-slot>` component
+#### (step 6) Reusable `<app-slot>` component
 
 Notice a big DX pain in writing those default contents. Web component / Vue slots allows library writers to put default content and slot name in place:
 
-```
+```html
 <slot name="authenticated>
   Some default content...
 </slot>
