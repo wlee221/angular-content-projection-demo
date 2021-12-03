@@ -1,1 +1,101 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "InterVariable", "Inter var", "Inter", -apple-system,
+    BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell,
+    "Open Sans", sans-serif;
+}
+
+.authenticator {
+  display: grid;
+}
+
+.error {
+  color: red;
+}
+form {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-content: normal;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: normal;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+button {
+  all: unset;
+  font-weight: normal;
+  border-width: 1px;
+  background-color: #047d95;
+  border-color: transparent;
+  color: #fff;
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  transition: all 250ms;
+  border: 1px solid #aeb3b7;
+  font-size: 1rem;
+  line-height: 1.75;
+  user-select: none;
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus {
+  background-color: #056;
+  border-color: transparent;
+  color: #fff;
+}
+
+h3 {
+  all: unset;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #0d1a26;
+  line-height: 1.25;
+  display: block;
+}
+
+.container {
+  position: relative;
+  place-self: center;
+  width: 30rem;
+  background-color: #fff;
+  box-shadow: 0px 2px 6px rgba(13, 26, 38, 0.15);
+  padding: 2rem;
+}
+
+input {
+  box-sizing: border-box;
+  font-family: unset;
+  font-size: 1rem;
+  line-height: 1.75;
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
+  padding-inline-start: 1rem;
+  padding-inline-end: 1rem;
+  transition: all 250ms;
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid #aeb3b7;
+  outline-color: transparent;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
+}
+
+input:focus {
+  border-color: #00404d;
+  box-shadow: 0px 0px 0px 1px #00404d;
+}
