@@ -3,7 +3,8 @@
     <div style="text-align: center; color: gray">© All Rights Reserved</div>
   </ng-template>
 
-  <ng-template appSlot="authenticated">
-    <h3>Welcome!</h3>
+  <ng-template appSlot="authenticated" let-user="user" let-signOut="signOut">
+    <h3>Welcome, {{ user.username }}!</h3>
+    <button (click)="signOut()" style="width: unset">Sign Out</button>
   </ng-template>
 </app-authenticator>

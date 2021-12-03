@@ -51,4 +51,15 @@ export class AuthenticatorComponent implements AfterContentInit {
     });
     this.customComponents = customComponents;
   }
+
+  handleSignOut() {
+    this.user = undefined;
+  }
+
+  get context() {
+    return {
+      user: this.user,
+      signOut: () => this.handleSignOut(),
+    };
+  }
 }
