@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthenticatorComponent } from './authenticator/authenticator.component';
+import { SlotDirective } from './slot.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthenticatorComponent
+    AuthenticatorComponent,
+    SlotDirective
   ],
   imports: [
     BrowserModule

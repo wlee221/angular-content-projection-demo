@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  QueryList,
+  TemplateRef,
+} from '@angular/core';
 import { signIn } from '../mocks';
+import { SlotDirective } from '../slot.directive';
 import { User } from './types';
 
 @Component({
@@ -7,7 +14,11 @@ import { User } from './types';
   templateUrl: './authenticator.component.html',
   styleUrls: ['./authenticator.component.css'],
 })
-export class AuthenticatorComponent {
+export class AuthenticatorComponent implements AfterContentInit {
+  @ContentChildren(SlotDirective)
+  private customComponentQuery: QueryList<SlotDirective> | undefined;
+  public customComponents: Record<string, TemplateRef<any>> | undefined;
+
   public error = '';
   public user: User | undefined = undefined;
 
@@ -27,5 +38,17 @@ export class AuthenticatorComponent {
       .catch((error) => {
         this.error = error;
       });
+  }
+
+  ngAfterContentInit(): void {
+    if (!this.customComponentQuery) return;
+
+    const customComponents: Record<string, TemplateRef<any>> = {};
+    this.customComponentQuery.forEach((slot: SlotDirective) => {
+      if (slot.name) {
+        customComponents[slot.name] = slot.template;
+      }
+    });
+    this.customComponents = customComponents;
   }
 }

@@ -10,12 +10,16 @@
         {{ error }}
       </div>
     </form>
-    <ng-content select=".footer"></ng-content>
+    <ng-container
+      [ngTemplateOutlet]="customComponents?.footer || null"
+    ></ng-container>
   </div>
 </div>
 
 <!-- If user is signed in, project desired content -->
 <div class="authenticated" *ngIf="user">
   <!-- Accept contents with class name "authenticated" -->
-  <ng-content select=".authenticated"></ng-content>
+  <ng-container
+    [ngTemplateOutlet]="customComponents?.authenticated || null"
+  ></ng-container>
 </div>
