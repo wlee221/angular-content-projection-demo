@@ -1,17 +1,17 @@
-<div class="authenticator">
+<!-- If user is not signed in, show sign in form -->
+<div class="authenticator" *ngIf="!user">
   <div class="container">
-    <div class="sign-in" *ngIf="!user">
-      <h3>Sign in to your account</h3>
-      <form (submit)="handleSignIn($event)">
-        <input name="username" placeholder="Username" />
-        <input name="password" type="password" placeholder="Password" />
-        <button>Sign In</button>
-        <div class="error" *ngIf="error">
-          {{ error }}
-        </div>
-      </form>
-    </div>
-
-    <div class="authenticated" *ngIf="user"></div>
+    <h3>Sign in to your account</h3>
+    <form (submit)="handleSignIn($event)">
+      <input name="username" placeholder="Username" />
+      <input name="password" type="password" placeholder="Password" />
+      <button>Sign In</button>
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+    </form>
   </div>
 </div>
+
+<!-- TODO: if user is signed in, project desired content -->
+<div class="authenticated" *ngIf="user"></div>
