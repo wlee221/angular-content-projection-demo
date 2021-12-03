@@ -23,7 +23,6 @@ export class AuthenticatorComponent {
       .then(() => {
         this.error = '';
         this.user = { username };
-        alert('success!')
       })
       .catch((error) => {
         this.error = error;

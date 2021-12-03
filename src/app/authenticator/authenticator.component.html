@@ -13,5 +13,7 @@
   </div>
 </div>
 
-<!-- TODO: if user is signed in, project desired content -->
-<div class="authenticated" *ngIf="user"></div>
+<!-- If user is signed in, project desired content -->
+<div class="authenticated" *ngIf="user">
+  <ng-content></ng-content>
+</div>
