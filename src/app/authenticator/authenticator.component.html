@@ -10,10 +10,12 @@
         {{ error }}
       </div>
     </form>
+    <ng-content select=".footer"></ng-content>
   </div>
 </div>
 
 <!-- If user is signed in, project desired content -->
 <div class="authenticated" *ngIf="user">
-  <ng-content></ng-content>
+  <!-- Accept contents with class name "authenticated" -->
+  <ng-content select=".authenticated"></ng-content>
 </div>
