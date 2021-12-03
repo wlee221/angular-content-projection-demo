@@ -78,7 +78,7 @@ See: https://github.com/wlee221/angular-content-projection-demo/compare/step-3..
 
 #### (step 5) Default content
 
-    Because `ngTemplateOutlet` can accept JS epxressions to decide what to render, we can use it to have a fallback component if child component doesn't pass any slots.
+Because `ngTemplateOutlet` can accept JS epxressions to decide what to render, we can use it to have a fallback component if child component doesn't pass any slots.
 
 ```html
   <ng-template #defaultAuthenticated>
